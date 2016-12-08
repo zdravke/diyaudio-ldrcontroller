@@ -7,15 +7,15 @@
 void printTick() {
   if (percent > 100) percent = 100;
   oled.setFont(textFont);
-  oled.setCursor(20, 3);
-  oled.print("Calibrating ");
+  oled.setCursor(15, 3);
+  oled.print(msgCalib);
   oled.print(percent);
   oled.print("%");
   unsigned int elapsedTime = (millis() - calibStarted) / 1000;
   byte elapsedSeconds = elapsedTime % 60;
   byte elapsedMinutes = elapsedTime / 60;
-  oled.setCursor (15, 6);
-  oled.print("Elapsed time: ");
+  oled.setCursor (2, 6);
+  oled.print("Elapsed time:");
   oled.print(elapsedMinutes);
   oled.print(":");
   if (elapsedSeconds < 10)oled.print("0");

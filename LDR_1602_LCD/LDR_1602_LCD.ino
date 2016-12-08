@@ -38,7 +38,7 @@
 // So for example we can have 2 IN and 4 OUT, or 3 IN and 2 OUT, or 4 IN and 1 OUT, but NOT 3 IN and 3 OUT.
 #define INPUTCOUNT 4 	 //** number of inputs, 0 to 4. If 0, comment out the next line.
 char* inputName[INPUTCOUNT] = { "USB DAC", "DAC 2", "OPT DAC", "MEDIA"}; //** each name maximum 9 characters. There must be exactly INPUTCOUNT names in the list.
-  
+
 #define OUTPUTCOUNT 2                                                                                                                                    //** number of outputs, 0 to 4. If 0, comment out the next line.
 char* outputName[OUTPUTCOUNT] = { "LINE 1", "LINE 2" }; //** each name maximum 9 characters. There must be exactly OUTPUTCOUNT names in the list.
 
@@ -97,28 +97,31 @@ char msgNoCalib[] = "Please calibrate"; //** <-- maximum 19 characters
 #define LOAD_IMPEDANCE 100000 //** input impedance of the amplifier that follows the attenuator. Should not be less than 100K. Default: 220000 ohm
 #define VOL_MAX_STEP 50     //** maximum volume steps; range: 20...80. Higher = more memory usage
 #define VOL_DEFAULT 10      //** default volume step. Must be <= than MAX
+#define AIO                   //** enables AIO (All-In-One) PCB, comment out for original PCB
 
 
 /******* LDR measured values *******/
-#define LDR_VOLTAGE 4.97     //** precisely measured value of the +5V supply (with decimal point. Default: 5.0)
+#define LDR_VOLTAGE 5.0     //** precisely measured value of the +5V supply (with decimal point. Default: 5.0)
 #define LDR_R1 10000        //** precisely measured value of R1 resistor (default: 10000 ohm)
 #define LDR_R18 10000       //** precisely measured value of R18 resistor (default: 10000 ohm)
 
 // if any measured value is > 200 ohm, replace the LDR. Normal values are around 100 ohm.
+
 //#define LDR_LSE_MIN 65.2     //** measured value of left series LDR R at maximum current
 //#define LDR_LSH_MIN 66.6     //** measured value of left shunt LDR R at maximum current
 //#define LDR_RSE_MIN 104     //** measured value of right series LDR R at maximum current
 //#define LDR_RSH_MIN 69.4     //** measured value of right shunt LDR R at maximum current
 
-//#define LDR_LSE_MIN 87     //** measured value of left series LDR R at maximum current
-//#define LDR_LSH_MIN 134     //** measured value of left shunt LDR R at maximum current
-//#define LDR_RSE_MIN 105     //** measured value of right series LDR R at maximum current
-//#define LDR_RSH_MIN 82     //** measured value of right shunt LDR R at maximum current
+// test setup
+#define LDR_LSE_MIN 87     //** measured value of left series LDR R at maximum current
+#define LDR_LSH_MIN 134     //** measured value of left shunt LDR R at maximum current
+#define LDR_RSE_MIN 105     //** measured value of right series LDR R at maximum current
+#define LDR_RSH_MIN 82     //** measured value of right shunt LDR R at maximum current
 
-#define LDR_LSE_MIN 113     //** measured value of left series LDR R at maximum current
-#define LDR_LSH_MIN 114     //** measured value of left shunt LDR R at maximum current
-#define LDR_RSE_MIN 83     //** measured value of right series LDR R at maximum current
-#define LDR_RSH_MIN 109     //** measured value of right shunt LDR R at maximum current
+//#define LDR_LSE_MIN 113     //** measured value of left series LDR R at maximum current
+//#define LDR_LSH_MIN 114     //** measured value of left shunt LDR R at maximum current
+//#define LDR_RSE_MIN 83     //** measured value of right series LDR R at maximum current
+//#define LDR_RSH_MIN 109     //** measured value of right shunt LDR R at maximum current
 
 
 /******* SCREEN *******/
@@ -176,8 +179,13 @@ char msgNoCalib[] = "Please calibrate"; //** <-- maximum 19 characters
 #define PIN_EXT_R2 2      // port extender: relay 2
 #define PIN_EXT_R3 3      // port extender: relay 3
 #define PIN_EXT_R4 6      // port extender: relay 4
+#ifdef AIO                // swap R5 and R6 pins for ALL-IN-ONE controller PCB
 #define PIN_EXT_R5 5      // port extender: relay 5
-#define PIN_EXT_R6 4      // port extender: relay 6. Used for delay relay
+#define PIN_EXT_R6 4      // port extender: relay 6
+#else if
+#define PIN_EXT_R5 4      // port extender: relay 5
+#define PIN_EXT_R6 5      // port extender: relay 6
+#endif
 #define PIN_EXT_BIAS 7    // port extender: BIAS
 
 /****** IR remote codes - Apple ******/
